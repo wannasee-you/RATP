@@ -28,6 +28,7 @@ parser.add_argument("--seed", type=int, default=4)
 
 config = parser.parse_args()
 config.max_ACC = 0
+Dataset = Dateset_mat(config.dataset_root)
 dataset = Dataset.getdata()
 label1 = np.array(dataset[2]) - 1
 all_label = np.squeeze(label1)
@@ -106,12 +107,12 @@ def run_S():
         c_best_epoch = max_acc_idx + 1
         c_loss = all_loss[max_acc_idx]
         print(f"\n===== iter {iter_outer} 最优结果 =====")
-        print(f"最大ACC: {c_max_acc:.4f}，对应NMI: {c_corresponding_nmi:.4f}, 对应loss: {c_loss:.4f}")
-        print(f"（对应epoch: {c_best_epoch}）\n")
+        print(f"ACC: {c_max_acc:.4f}，NMI: {c_corresponding_nmi:.4f}, loss: {c_loss:.4f}")
+        print(f"（epoch: {c_best_epoch}）\n")
         logger.info(f"\n===== iter {iter_outer} 最优结果 =====")
-        logger.info(f"最大ACC: {c_max_acc:.4f}，对应NMI: {c_corresponding_nmi:.4f}, 对应loss: {c_loss:.4f}, 对应epoch: {c_best_epoch}）\n")
+        logger.info(f"ACC: {c_max_acc:.4f}，NMI: {c_corresponding_nmi:.4f}, loss: {c_loss:.4f}, epoch: {c_best_epoch}）\n")
         logger.info(f"{'='*50}\n")
-        if c_max_acc > global_best_metrics['max_acc']:
+        if c_max_acc > global_best_metrics['acc']:
             global_best_metrics.update({
             'max_acc': c_max_acc,
             'max_nmi': c_corresponding_nmi,
@@ -128,12 +129,12 @@ def run_S():
                 'best_epoch': c_best_epoch
             })
     print(f"\n===== 全局最优结果 =====")
-    print(f"最大ACC: {global_best_metrics['max_acc']:.4f}")
-    print(f"对应NMI: {global_best_metrics['max_nmi']:.4f}")
-    print(f"对应循环次数（iter_outer）: {global_best_metrics['best_iter']}")
-    print(f"对应epoch: {global_best_metrics['best_epoch']}")
+    print(f"ACC: {global_best_metrics['max_acc']:.4f}")
+    print(f"NMI: {global_best_metrics['max_nmi']:.4f}")
+    print(f"循环次数（iter_outer）: {global_best_metrics['best_iter']}")
+    print(f"epoch: {global_best_metrics['best_epoch']}")
     logger.info(f"\n===== 全局最优结果 =====")
-    logger.info(f"最大ACC: {global_best_metrics['max_acc']:.4f}，对应NMI: {global_best_metrics['max_nmi']:.4f}, 对应loss: {global_best_metrics['loss']:.4f}, 对应iters: {global_best_metrics['best_iter']:.4f}, 对应epoch: {global_best_metrics['best_epoch']}）\n")
+    logger.info(f"ACC: {global_best_metrics['max_acc']:.4f}，NMI: {global_best_metrics['max_nmi']:.4f}, loss: {global_best_metrics['loss']:.4f}, iters: {global_best_metrics['best_iter']:.4f}, epoch: {global_best_metrics['best_epoch']}）\n")
     logger.info(f"{'='*50}\n")
     # for handler in logger.handlers:
     #     handler.close()

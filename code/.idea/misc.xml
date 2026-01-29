@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="py37_torch1.9" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="py37_torch1.9" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="D:\software\conda3\envs\pytorch-gpu" project-jdk-type="Python SDK" />
 </project>
